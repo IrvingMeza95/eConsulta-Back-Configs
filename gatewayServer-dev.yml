@@ -1,0 +1,48 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: servicioUsuarios
+          uri: lb://servicioUsuarios
+          predicates:
+            - Path=/api/usuarios/**
+          filters:
+            - StripPrefix=2
+        - id: servicioOauth
+          uri: lb://servicioOauth
+          predicates:
+            - Path=/api/security/**
+          filters:
+            - StripPrefix=2
+        - id: servicioChats
+          uri: lb://servicioChats
+          predicates:
+            - Path=/api/chats/**
+          filters:
+            - StripPrefix=2
+        - id: filesManagerService
+          uri: lb://filesManagerService
+          predicates:
+            - Path=/api/files/**
+          filters:
+            - StripPrefix=2
+        - id: wsChatsServer
+          uri: lb://wsChatsServer
+          predicates:
+            - Path=/api/wsChats/**
+          filters:
+            - StripPrefix=2
+        - id: servicioVerificacion
+          uri: lb://servicioVerificacion
+          predicates:
+            - Path=/api/verificacion/**
+          filters:
+            - StripPrefix=2
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
