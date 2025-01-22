@@ -41,6 +41,12 @@ spring:
             - Path=/api/verificacion/**
           filters:
             - StripPrefix=2
+        - id: servicioConsultas
+          uri: lb://servicioConsultas
+          predicates:
+            - Path=/api/consultas/**
+          filters:
+            - StripPrefix=2
 management:
   endpoints:
     web:
